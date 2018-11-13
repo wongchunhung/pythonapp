@@ -1,5 +1,4 @@
 pipeline:
 
   build:
-      image: ingress.k8s-1.local/chunha/pythonapp
-      
+      image: wongchunhung/pythonapp
