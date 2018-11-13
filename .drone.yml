@@ -1,5 +1,5 @@
 pipeline:
-  docker:
-    image: plugins/docker
-    repo: ingress.k8s-1.local/chunha/pythonapp
-    tags: latest
+
+  build:
+      image: ingress.k8s-1.local/chunha/pythonapp
+      
