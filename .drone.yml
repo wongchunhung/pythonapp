@@ -1,7 +1,9 @@
 pipeline:
   docker:
     image: plugins/docker
-    repo: chunha/pythonapp/
+    repo: chunha/pythonapp
     username: chunha
     password: p@55W0rd
     auto_tag: true
+  build:
+    image: chunha/pythonapp:0.2
