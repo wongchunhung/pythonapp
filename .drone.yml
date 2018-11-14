@@ -3,3 +3,6 @@ pipeline:
     image: plugins/docker
     repo: wongchunhung/pythonapp
     auto_tag: true
+
+  build:
+    image: wongchunhung/pythonapp:1.0
