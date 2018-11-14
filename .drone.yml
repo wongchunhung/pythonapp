@@ -4,4 +4,7 @@ pipeline:
     repo: chunha/pythonapp
     username: chunha
     password: p@55W0rd
-    auto_tag: true
+    tags:
+      - latest
+    dockerfile: ./api/Dockerfile
+    context: ./api/
