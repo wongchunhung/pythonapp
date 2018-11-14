@@ -6,5 +6,3 @@ pipeline:
     password: p@55W0rd
     tags:
       - latest
-    dockerfile: ./api/Dockerfile
-    context: ./api/
