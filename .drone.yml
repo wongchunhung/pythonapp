@@ -1,6 +1,8 @@
+platform: linux/arm
+
 pipeline:
   docker:
-    image: plugins/docker:arm
+    image: plugins/docker
     repo: chunha/pythonapp
     username: chunha
     password: p@55W0rd
