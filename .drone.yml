@@ -7,5 +7,6 @@ pipeline:
 
     commands:
       - sleep 5
-      - cd /home/pi/yaml/pythonapp
+      - git clone https://github.com/wongchunhung/pythonapp.git
+      - cd pythonapp
       - docker build -t wongchunhung/pythonapp:0.2 .
