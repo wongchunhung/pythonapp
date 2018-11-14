@@ -2,6 +2,3 @@ pipeline:
 
   build:
     image: plugins/docker
-
-    commands:
-      - docker build -t wongchunhung/pythonapp:0.2 .
