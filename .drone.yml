@@ -2,8 +2,6 @@ pipeline:
 
   build:
     image: plugins/docker
-    environment:
-      - DOCKER_HOST=tcp://localhost:2375
 
     commands:
       - docker build -t wongchunhung/pythonapp:0.2 .
