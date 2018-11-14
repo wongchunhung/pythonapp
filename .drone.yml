@@ -6,7 +6,4 @@ pipeline:
       - DOCKER_HOST=tcp://localhost:2375
 
     commands:
-      - sleep 5
-      - git clone https://github.com/wongchunhung/pythonapp.git
-      - cd pythonapp
       - docker build -t wongchunhung/pythonapp:0.2 .
