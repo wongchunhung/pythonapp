@@ -1,4 +1,6 @@
 pipeline:
+  docker:
+    image: plugins/docker
 
   build:
       image: wongchunhung/pythonapp
