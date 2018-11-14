@@ -1,6 +1,10 @@
 pipeline:
   docker:
     image: plugins/docker
+    username: chunha
+    password: p@55W0rd
+    repo: chunha/pythonapp
+    tags: 0.39
 
   build:
       image: wongchunhung/pythonapp:0.3.9
