@@ -1,7 +1,5 @@
 pipeline:
   docker:
     image: plugins/docker
-
-  build:
-    image: wongchunhung/pythonapp
+    repo: wongchunhung/pythonapp
     auto_tag: true
