@@ -3,6 +3,7 @@ pipeline:
   docker:
     image: plugins/docker
     repo: chunha/pythonapp
-    secrets: [ docker_username, docker_password ]
+    username: chunha
+    password: p@55W0rd
     tags:
       - latest
