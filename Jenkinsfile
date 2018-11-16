@@ -1,1 +1,5 @@
-docker build -t chunha/pythonapp: latest .
+pipeline {
+    agent { dockerfile true }
+    stages {
+    }
+}
