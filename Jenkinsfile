@@ -7,7 +7,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t chunha/pythonapp:$BUILD_NUMBER'
+        sh 'docker build -t chunha/pythonapp:$BUILD_NUMBER .'
       }
     }
     stage('Docker Push') {
