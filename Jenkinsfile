@@ -7,7 +7,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t chunha/pythonapp:${env.BUILD_ID} .'
+        sh 'docker build -t chunha/pythonapp:latest .'
       }
     }
     stage('Docker Push') {
@@ -15,7 +15,7 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push chunha/pythonapp:${env.BUILD_ID}'
+          sh 'docker push chunha/pythonapp:latest'
         }
       }
     }
