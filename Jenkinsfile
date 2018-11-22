@@ -1,7 +1,7 @@
 node {
   stage "Git pull"
     git url: 'https://github.com/wongchunhung/pythonapp.git'
-    sh 'git pull https://github.com/wongchunhung/pythonapp.git master'
+    sh 'git fitch https://github.com/wongchunhung/pythonapp.git'
 
   stage "Docker Build"
     sh 'docker build -t chunha/pythonapp:0.1.${BUILD_NUMBER} .'
