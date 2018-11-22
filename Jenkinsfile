@@ -4,6 +4,8 @@ node {
     sh 'git checkout master'
     sh 'git fetch https://github.com/wongchunhung/pythonapp.git'
 
+    echo 'Pulling...' + env.BRANCH_NAME
+
   stage "Docker Build"
     sh 'docker build -t chunha/pythonapp:0.1.${BUILD_NUMBER} .'
 
