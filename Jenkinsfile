@@ -1,23 +1,15 @@
-pipeline {
-  agent none
-  environment {
-    BUILD_NUMBER = VersionNumber(projectStartDate: '1970-01-01', versionNumberString: '${BUILD_DATE_FORMATTED, "yyyyMMddHHmm"}', versionPrefix: '')
-    }
-  stages {
-    stage('Docker Build') {
-      agent any
-      steps {
-        sh 'docker build -t chunha/pythonapp:latest .'
+node {
+  stage "Docker Build"
+    sh 'docker build -t chunha/pythonapp:0.1.${BUILD_NUMBER} .'
+
+  stage "Docker Push"
+    withCredentials([usernamePassword(credentialsId: 'harbor', passwordVariable: 'harborPassword', usernameVariable: 'harborUser')]) {
+      sh "docker login -u ${env.harborUser} -p ${env.harborPassword} ingress.k8s-1.local"
+      sh 'docker tag chunha/pythonapp:0.1.${BUILD_NUMBER} ingress.k8s-1.local/chunha/pythonapp:0.1.${BUILD_NUMBER}'
+      sh 'docker push ingress.k8s-1.local/chunha/pythonapp:0.1.${BUILD_NUMBER}'
       }
-    }
-    stage('Docker Push') {
-      agent any
-      steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push chunha/pythonapp:latest'
-        }
-      }
-    }
-  }
+
+  stage "Start next job"
+
+  build job: 'pythonapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
 }
