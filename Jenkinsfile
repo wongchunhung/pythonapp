@@ -1,6 +1,6 @@
 node {
   stage "Git pull"
-    //git url: 'https://github.com/wongchunhung/pythonapp.git'
+    git url: 'https://github.com/wongchunhung/pythonapp.git'
     sh 'git fetch https://github.com/wongchunhung/pythonapp.git'
 
   stage "Docker Build"
