@@ -1,4 +1,12 @@
 node {
+    stage('build'){
+        echo "building"
+    }
+}
+stage('Deploy approval'){
+    input "Deploy to prod?"
+}
+node {
   stage "Git pull"
     git url: 'https://github.com/wongchunhung/pythonapp.git'
     sh 'git checkout master'
