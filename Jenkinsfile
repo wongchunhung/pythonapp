@@ -9,7 +9,13 @@ node {
   stage "Docker Build"
     sh 'docker build -t chunha/pythonapp:0.1.${BUILD_NUMBER} .'
 
-  stage "Docker Push"
+  stage "Unit test"
+    echo "unit test..."
+
+  Stage "Integration test"
+    echo "Integration test..."
+
+  stage "Image Push"
     withCredentials([usernamePassword(credentialsId: 'harbor', passwordVariable: 'harborPassword', usernameVariable: 'harborUser')]) {
       sh "docker login -u ${env.harborUser} -p ${env.harborPassword} ingress.k8s-1.local"
       sh 'docker tag chunha/pythonapp:0.1.${BUILD_NUMBER} ingress.k8s-1.local/chunha/pythonapp:0.1.${BUILD_NUMBER}'
