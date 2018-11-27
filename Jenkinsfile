@@ -1,13 +1,17 @@
 node {
-  stage "Git fetch"
+  stage "Git pull"
     git url: 'https://github.com/wongchunhung/pythonapp.git'
     sh 'git checkout master'
-    sh 'git pull https://github.com/wongchunhung/pythonapp.git'
-
-    echo 'Pulling... ${scm.branches[0].name}'
+    sh 'git stash'
+    //sh 'git config --global user.email "chunha@gmail.com"'
+    //sh 'git config --global user.name "IW"'
+    sh 'git pull'
 
   stage "Docker Build"
     sh 'docker build -t chunha/pythonapp:0.1.${BUILD_NUMBER} .'
+
+  stage "Git clean"
+    sh 'git clean -f'
 
   stage "Unit test"
     echo "unit test..."
@@ -20,13 +24,8 @@ node {
       sh "docker login -u ${env.harborUser} -p ${env.harborPassword} ingress.k8s-1.local"
       sh 'docker tag chunha/pythonapp:0.1.${BUILD_NUMBER} ingress.k8s-1.local/chunha/pythonapp:0.1.${BUILD_NUMBER}'
       sh 'docker push ingress.k8s-1.local/chunha/pythonapp:0.1.${BUILD_NUMBER}'
-      }
-}
-stage('Deploy approval'){
-    input "Deploy to prod?"
-}
-node {
-    stage('Start Deployment'){
-        build job: 'pythonapp_deploy_k8s_production', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
     }
+
+  stage "Deployment"
+    build job: 'pythonapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
 }
