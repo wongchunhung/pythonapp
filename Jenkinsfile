@@ -3,9 +3,7 @@ node {
     git url: 'https://github.com/wongchunhung/pythonapp.git'
     sh 'git checkout master'
     sh 'git stash'
-    //sh 'git config --global user.email "chunha@gmail.com"'
-    //sh 'git config --global user.name "IW"'
-    sh 'git pull'
+    sh 'git pull https://github.com/wongchunhung/pythonapp.git'
 
   stage "Docker Build"
     sh 'docker build -t chunha/pythonapp:0.1.${BUILD_NUMBER} .'
