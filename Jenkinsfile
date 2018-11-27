@@ -2,6 +2,8 @@ node {
   stage "Git pull"
     git url: 'https://github.com/wongchunhung/pythonapp.git'
     sh 'git checkout master'
+    sh 'git clean -f'
+    sh 'git reset'
     sh 'git stash'
     sh 'git pull https://github.com/wongchunhung/pythonapp.git'
 
