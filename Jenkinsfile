@@ -25,5 +25,5 @@ node {
     }
 
   stage "Deployment"
-    build job: 'pythonapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
+    build job: '	pythonapp_deploy_k8s_production', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
 }
