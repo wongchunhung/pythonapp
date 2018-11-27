@@ -12,7 +12,7 @@ node {
   stage "Unit test"
     echo "unit test..."
 
-  Stage "Integration test"
+  stage "Integration test"
     echo "Integration test..."
 
   stage "Image Push"
