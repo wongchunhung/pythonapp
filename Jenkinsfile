@@ -2,7 +2,7 @@ node {
   stage "Git fetch"
     git url: 'https://github.com/wongchunhung/pythonapp.git'
     sh 'git checkout master'
-    sh 'git fetch https://github.com/wongchunhung/pythonapp.git'
+    sh 'git pull'
 
     echo 'Pulling... ${scm.branches[0].name}'
 
