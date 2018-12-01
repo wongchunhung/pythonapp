@@ -1,11 +1,13 @@
+Jenkinsfile (test)
+
 node {
   stage "Git pull"
     git url: 'https://github.com/wongchunhung/pythonapp.git'
-    sh 'git checkout master'
+    sh 'git checkout test'
     sh 'git clean -f'
     sh 'git reset'
     sh 'git stash'
-    sh 'git pull https://github.com/wongchunhung/pythonapp.git'
+    sh 'git pull'
 
   stage "Docker Build"
     sh 'docker build -t chunha/pythonapp:0.1.${BUILD_NUMBER} .'
@@ -25,12 +27,7 @@ node {
       sh 'docker tag chunha/pythonapp:0.1.${BUILD_NUMBER} ingress.k8s-1.local/chunha/pythonapp:0.1.${BUILD_NUMBER}'
       sh 'docker push ingress.k8s-1.local/chunha/pythonapp:0.1.${BUILD_NUMBER}'
     }
-}
-stage('Deploy approval'){
-    input "Deploy to prod?"
-}
-node {
-    stage('Start Deployment'){
-        build job: 'pythonapp_deploy_k8s_production', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
-    }
+
+  stage "Deployment"
+    build job: 'pythonapp_k8s_deploy', parameters: [[$class: 'StringParameterValue', name: 'BUILD', value: BUILD_NUMBER]]
 }
