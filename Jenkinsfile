@@ -1,5 +1,3 @@
-Jenkinsfile (test)
-
 node {
   stage "Git pull"
     git url: 'https://github.com/wongchunhung/pythonapp.git'
